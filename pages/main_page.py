@@ -22,10 +22,14 @@ class MainPage(BasePage):
         locator = MainPageLocators.faq_answer(index)
         return self.get_element_text(locator)
 
-    @allure.step("Нажать кнопку 'Заказать' (точка входа)")
+    @allure.step("Нажать кнопку 'Заказать' (из параметризации)")
     def click_order_button(self, button_locator):
         self.scroll_to_element(button_locator)
         self.click_element(button_locator)
+
+    @allure.step("Нажать верхнюю кнопку 'Заказать' в шапке")
+    def click_top_order_button(self):
+        self.click_element(MainPageLocators.ORDER_BUTTON_TOP)
 
     @allure.step("Нажать на логотип Самоката")
     def click_scooter_logo(self):

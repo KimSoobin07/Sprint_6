@@ -16,7 +16,6 @@ class BasePage:
     @allure.step("Ввести текст '{text}' в поле")
     def enter_text(self, locator, text):
         element = self.wait.until(EC.visibility_of_element_located(locator))
-        element.clear()
         element.send_keys(text)
 
     @allure.step("Получить текст элемента")
@@ -34,12 +33,13 @@ class BasePage:
         self.wait.until(EC.number_of_windows_to_be(2))
         self.driver.switch_to.window(self.driver.window_handles[1])
 
-    @allure.step("Дождаться URL '{url}'")
+    @allure.step("Получить текущий URL страницы")
+    def get_current_url(self):
+        return self.driver.current_url
+
+    @allure.step("Дождаться появления '{url}' в адресе страницы")
     def wait_for_url_contains(self, url):
         self.wait.until(EC.url_contains(url))
 
-    @allure.step("Дождаться завершения редиректа в новой вкладке")
-    def wait_for_url_not_about_blank(self):
-        self.wait.until(lambda d: d.current_url != "about:blank" and d.current_url != "")
 
         
